@@ -14,7 +14,7 @@ Official pages independently checked:
 - [Alibaba Model Studio overview](https://help.aliyun.com/zh/model-studio/what-is-model-studio)
 - [Current ai.com website](https://ai.com/)
 
-## Corrections
+## Earlier research changes (Claude exclusions superseded below)
 
 - Removed ai.com from OpenAI: its current website describes its own agent platform, not an OpenAI entry point.
 - Moved Copilot-specific Web PubSub and report hosts to the main list, verified against GitHub. A dedicated hostname on a shared cloud is not equivalent to a shared hostname.
@@ -25,7 +25,7 @@ Official pages independently checked:
 - Kept Cursor's new sign-in suffix: its official page explicitly recommends it, including related authentication hosts.
 - Replaced the old IP set with the final IP section: 160.79.104.0/23, 153.61.224.0/22 and 2607:6bc0::/48 are documented inbound addresses. 160.79.104.0/21 and 153.61.208.0/20 are documented OUTBOUND source ranges, not the client destination list. Removed unsubstantiated 34.8.0.0/16. This corrects the supplied report's claim that the /20 was not in visible documentation.
 
-## Deferred and excluded
+## Earlier exclusions (Claude baseline restored below)
 
 Unconfirmed Claude aliases from the previous list are not active: claude.app, claude.dev, claude.new, claude.site, claudeacademy.com, claudemcpclient.com, claudepages.dev, claudestudio.com, anthropic.team, antspace.dev and chatbotclaude.com. The earlier marketing/CDN/Auth0/Ghost entries also need evidence before restoration.
 
@@ -49,3 +49,11 @@ These upstream inventories were reported by the supplied research; this review d
 ## Single subscription
 
 At the user's request, service domains, shared dependencies and verified inbound IPs are now combined in ai.list. Provider and dependency comments remain; IP rules follow all domain rules. The two temporary optional list files were removed to keep one maintained AI subscription.
+
+## Claude baseline restoration
+
+The earlier review incorrectly treated uncertain evidence as permission to delete user-provided rules. All 38 domain rules and 4 IP rules from the original Claude-only commit are now explicitly restored. Shared dependencies and aliases remain in the Claude baseline with their original DOMAIN-SUFFIX match scope. The original four IPv4 ranges are active alongside the additional documented inbound ranges; redundant narrower entries are retained to preserve the existing rule inventory.
+
+This supersedes the earlier exclusions of Claude aliases, verification, telemetry and IP entries. The /21 and 153.61.208.0/20 remain documented outbound source ranges, and 34.8.0.0/16 remains user supplied rather than independently verified; they are retained as deliberate user routing choices. Future research should annotate uncertainty without silently deleting or narrowing the baseline.
+
+Validation compared every original rule with the restored list and confirmed all 42 are present. Every rule from the preceding combined list is also retained. No device-level connectivity test was performed.

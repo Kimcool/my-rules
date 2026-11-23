@@ -2,20 +2,52 @@
 # Reviewed: 2026-11-23 (Asia/Singapore)
 # Service-scoped domains from supplied research; official and community evidence are mixed.
 # Includes shared third-party dependencies below; they also match non-AI traffic.
-# Inbound IP rules are at the end; unresolved entries are documented in REVIEW.md.
+# Claude IP rules, including the user-maintained baseline, are at the end; see REVIEW.md.
 # Review scope, evidence and exclusions: REVIEW.md
 # This list is not claimed to be complete.
 
-# ----- Anthropic / Claude -----
-# Official: https://code.claude.com/docs/en/network-config
-# Official IPs (not included here): https://platform.claude.com/docs/en/api/ip-addresses
-DOMAIN-SUFFIX,anthropic.com
+# ----- Anthropic / Claude: user-maintained baseline -----
+# Preserve all 38 user-supplied domain rules, including shared services and aliases.
+# Research may annotate these entries; it must not silently remove or narrow them.
+# This baseline is user-selected, not a claim of verified service ownership.
 DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,claude.app
 DOMAIN-SUFFIX,claudemcpcontent.com
 DOMAIN-SUFFIX,clau.de
+DOMAIN-SUFFIX,claudemcpclient.com
+DOMAIN-SUFFIX,claude.dev
+DOMAIN-SUFFIX,claude.site
+DOMAIN-SUFFIX,claudeacademy.com
+DOMAIN-SUFFIX,claude.new
 DOMAIN-SUFFIX,ant.dev
+DOMAIN-SUFFIX,anthropic.team
+DOMAIN-SUFFIX,antspace.dev
+DOMAIN-SUFFIX,chatbotclaude.com
+DOMAIN-SUFFIX,claudepages.dev
+DOMAIN-SUFFIX,claudestudio.com
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN-SUFFIX,intercomassets.com
+DOMAIN-SUFFIX,intercom-messenger.com
+DOMAIN-SUFFIX,us5.datadoghq.com
+DOMAIN-SUFFIX,browser-intake-us5-datadoghq.com
+DOMAIN-SUFFIX,r.stripe.com
+DOMAIN-SUFFIX,us.sentry.io
+DOMAIN-SUFFIX,siftscience.com
+DOMAIN-SUFFIX,fcmtoken.googleapis.com
+DOMAIN-SUFFIX,servd-anthropic-website.b-cdn.net
+DOMAIN-SUFFIX,anthropic.auth0.com
+DOMAIN-SUFFIX,anthropic-com.ghost.io
+DOMAIN-SUFFIX,anthropic.com.cdn.cloudflare.net
+DOMAIN-SUFFIX,hcaptcha.com
+DOMAIN-SUFFIX,challenges.cloudflare.com
+DOMAIN-SUFFIX,withpersona.com
+DOMAIN-SUFFIX,yoti.com
+DOMAIN-SUFFIX,statsigapi.net
+DOMAIN-SUFFIX,usefathom.com
 
 # ----- OpenAI / ChatGPT / Sora / Codex -----
 # Official allowlist: https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
@@ -275,8 +307,6 @@ DOMAIN,images.workoscdn.com
 DOMAIN,setup.workos.com
 DOMAIN,workos.imgix.net
 # Support chat (Intercom). DOMAIN-SUFFIX,intercom.io will catch all Intercom customers.
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
 # Payment
 DOMAIN,js.stripe.com
 # Cloudflare bot challenge (shared)
@@ -318,7 +348,6 @@ DOMAIN,ingest.us.sentry.io
 # Community / X discussion of Statsig + Sift risk controls (not official allowlist entries)
 # https://x.com/LanzhiAI/status/2123344781115879540 (2026-11-19)
 # https://x.com/LanzhiAI/status/2124133729602073031 (2026-11-21)
-DOMAIN-SUFFIX,statsigapi.net
 # SSO / cloud provider hosts if using Console login or Bedrock/Vertex/Foundry
 DOMAIN,login.microsoftonline.com
 DOMAIN,oauth2.googleapis.com
@@ -411,7 +440,7 @@ DOMAIN,default.exp-tas.com
 # Copilot-specific Azure Web PubSub hosts are in the provider sections above.
 # Fallback report downloads (shared Azure Front Door / Blob)
 # copilot-reports-*.b01.azurefd.net and usagereports*.blob.core.windows.net
-# are wildcard Azure hosts; left out of formal DOMAIN rules, see unverified-and-excluded.md
+# are wildcard Azure hosts; left out of formal DOMAIN rules, see REVIEW.md
 
 # Cursor-specific binary downloads listed in the provider sections above.
 # WorkOS is listed by jinxinkai as DOMAIN-SUFFIX,workos.com (too broad).
@@ -434,10 +463,18 @@ DOMAIN-SUFFIX,edgeservices.bing.com
 DOMAIN,services.bingapis.com
 DOMAIN,r.bing.com
 
-# ===== Inbound IP rules (after all domain rules) =====
+# ===== Claude IP rules (after all domain rules) =====
 # Claude API / Console inbound IPs; not outbound MCP source networks.
 # Verified 2026-11-23: https://platform.claude.com/docs/en/api/ip-addresses
 # Place after domain rules. no-resolve avoids DNS solely for these IP matches.
 IP-CIDR,160.79.104.0/23,no-resolve
 IP-CIDR,153.61.224.0/22,no-resolve
 IP-CIDR6,2607:6bc0::/48,no-resolve
+
+# Claude / Original user-maintained IP baseline
+# Preserved as requested, not represented as an official inbound-only list.
+# The /21 and 153.61.208.0/20 are documented outbound source ranges;
+# 34.8.0.0/16 was user supplied. Keep their intended routing coverage.
+IP-CIDR,34.8.0.0/16,no-resolve
+IP-CIDR,160.79.104.0/21,no-resolve
+IP-CIDR,153.61.208.0/20,no-resolve
