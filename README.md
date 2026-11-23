@@ -6,6 +6,7 @@ Personal Surge rule sets. AI entries are grouped by provider, covering 16 provid
 | --- | --- |
 | [ai.list](ai.list) | All 293 rules, including the full original Claude baseline, other providers, shared dependencies and IP ranges |
 | [china.list](china.list) | WeChat/WeChat Pay, Alipay, Taobao/Tmall/Goofish and related resources; suggested DIRECT |
+| [outbank.list](outbank.list) | HSBC, Elephant Bank, ZA Bank and Wise; converted from yeahwu Bank.list |
 | [proxy.list](proxy.list) | Personal proxy overrides (initially empty) |
 | [direct.list](direct.list) | Personal direct overrides (initially empty) |
 
@@ -33,3 +34,13 @@ Reference: [Surge rule sets](https://manual.nssurge.com/rules/ruleset.html).
 ## China services scope
 
 china.list is a separate subscription for the requested everyday services, not a complete mainland-China routing database. WeChat domains come from the linked community rule source; Alipay and shopping domains are supported by the official agreement and homepage resource inspection cited in the list. Shared Tencent/Alibaba resources also affect other products. No broad qq.com, aliyuncs.com or cloud IP/ASN rules are included. IP-only connections, voice/video calls, merchant sites and third-party mini-program backends may need additional observed rules. No real-device login, payment or call test was performed. Existing AI rules are unchanged.
+
+## Overseas banking subscription
+
+Converted from [yeahwu Bank.list](https://github.com/yeahwu/Rules-For-Quantumult-X/blob/main/Rules/Services/Bank.list), retaining every active rule and leaving its commented wildcard inactive. HOST becomes DOMAIN, HOST-SUFFIX becomes DOMAIN-SUFFIX, and the embedded Bank policy is removed. Upstream shared analytics, risk and support domains remain included and may match other apps. This is a manual snapshot, not automatic upstream synchronization.
+
+Add to your existing `[Rule]` section before broader rules and FINAL. Replace `Bank` with your existing banking policy or chosen outbound policy; the repository does not select or create an outbound group.
+
+```ini
+RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/outbank.list,Bank
+```
