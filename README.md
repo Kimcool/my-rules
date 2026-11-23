@@ -5,7 +5,7 @@ Personal Surge rule sets. AI entries are grouped by provider, covering 16 provid
 | File | Purpose |
 | --- | --- |
 | [ai.list](ai.list) | All 293 rules, including the full original Claude baseline, other providers, shared dependencies and IP ranges |
-| [china.list](china.list) | 56 rules for WeChat/WeChat Pay, Alipay, Taobao/Tmall/Goofish and related resources; suggested DIRECT |
+| [china.list](china.list) | 749 rules: WeChat, Alipay, Alibaba/Taobao, JD and existing services; suggested DIRECT |
 | [outbank.list](outbank.list) | HSBC, Elephant Bank, ZA Bank and Wise; converted from yeahwu Bank.list |
 | [proxy.list](proxy.list) | Personal proxy overrides (initially empty) |
 | [direct.list](direct.list) | Personal direct overrides (initially empty) |
@@ -33,7 +33,7 @@ Reference: [Surge rule sets](https://manual.nssurge.com/rules/ruleset.html).
 
 ## China services scope
 
-china.list contains all 39 original rules plus 17 additions from the supplied research, grouped by service and function. See [China review](CHINA-REVIEW.md) for changes, source boundaries and known gaps. It is not a complete mainland-China routing database. Shared resources affect other products; regional Alipay and Cainiao domains use the same selected policy. No live-client login, payment or call test was performed. The existing AI and overseas-banking lists are unchanged.
+china.list retains the original 56 rules and merges every active rule from the six user-selected WeChat, AliPay, Alibaba and JingDong lists. Only identical lines are deduplicated. See [source snapshots and validation](CHINA-REVIEW.md). Broad cloud networks, ASN, TLD suffixes, numeric domain keywords and process/User-Agent rules are intentionally retained; the policy can affect other Tencent/Alibaba services. This is a manual snapshot, not automatic upstream synchronization. No live-client login, payment or call test was performed. The AI and overseas-bank lists are unchanged.
 
 ## Overseas banking subscription
 

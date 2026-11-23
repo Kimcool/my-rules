@@ -1,54 +1,29 @@
-# China rules import review — 2026-11-23
+# China upstream union — 2026-11-23
 
-## Result
+The user explicitly requested merging all active rules from six upstream lists. This supersedes the prior selective import policy. The original 56 rules are retained verbatim, and every active upstream rule is present. Only identical rule lines are deduplicated; suffix-covered entries and overlapping IP ranges remain. Commented-out upstream rules are not activated. Sources were fetched directly from raw.githubusercontent.com (the GitHub mirror prefix changes transport, not the requested source).
 
-Imported the user-supplied china.list after reviewing its accompanying changes, evidence, coverage, unverified-candidate and search-log documents. All 39 existing rules are retained verbatim. The update adds 17 domain rules (56 total), with no IP, ASN, process, keyword or User-Agent rules. Existing ai.list and outbank.list are unchanged.
+This intentionally includes numeric DOMAIN-KEYWORD patterns, IP ranges, ASN 132203, top-level suffixes, USER-AGENT and PROCESS-NAME entries. They are preserved as routing choices, not certified as narrow product-only destinations. Shared Tencent/Alibaba infrastructure can route unrelated traffic through the same selected policy. A source rule is not proof of present ownership or necessity.
 
-## Added rules
-
-```text
-DOMAIN,dldir1v6.qq.com
-DOMAIN-SUFFIX,alipay.cn
-DOMAIN-SUFFIX,alipay.com.cn
-DOMAIN-SUFFIX,alipay.hk
-DOMAIN-SUFFIX,alipaydns.com
-DOMAIN-SUFFIX,alipaymo.com
-DOMAIN-SUFFIX,alipayplus.com
-DOMAIN-SUFFIX,cainiao.com
-DOMAIN-SUFFIX,cainiao.com.cn
-DOMAIN-SUFFIX,taobaocdn.com
-DOMAIN-SUFFIX,tbcache.com
-DOMAIN-SUFFIX,tbcdn.cn
-DOMAIN-SUFFIX,wechatpay.cn
-DOMAIN-SUFFIX,weixin.qq.com.cn
-DOMAIN-SUFFIX,wx2.qq.com
-DOMAIN-SUFFIX,wx8.qq.com
-DOMAIN-SUFFIX,wxqcloud.qq.com.cn
-```
-
-## Evidence boundary
-
-Most provenance is from the supplied research and was not independently repeated. Its comments preserve the distinction between official references, community observations and unverified baseline entries. Search-log claims and source timestamps are not certified by this import.
-
-The [WeChat Web page](https://wx2.qq.com/) was independently opened and identified as WeChat/Weixin for Web. The WeChat Pay certificate-notice page could not be retrieved by the web tool, and the Alipay+ homepage timed out; neither was treated as a successful independent verification. These failures do not establish that the domains are invalid.
-
-Reported source groups:
-
-- WeChat web/download/developer resources: [WeChat](https://weixin.qq.com/), [wx2](https://wx2.qq.com/), [wx8](https://wx8.qq.com/), [mini-program networking](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html).
-- WeChat Pay: [certificate notice](https://pay.weixin.qq.com/index.php/public/wechatpay_en/server_cert_notif/), [official Java SDK](https://github.com/wechatpay-apiv3/wechatpay-java), [face-payment terminal network guidance](https://pay.wechatpay.cn/wiki/doc/wxfacepay/faq/network.html). Terminal IP allowlists are not adopted as personal-app destinations.
-- Community Alipay/CDN entries: [v2fly Alibaba data](https://github.com/v2fly/domain-list-community/blob/master/data/alibaba), [blackmatrix7 AliPay](https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/AliPay/AliPay.list). Some official portal pages were unreadable in the supplied research; these entries remain community-supported.
-- Cainiao: [official website](https://www.cainiao.com/), [community data](https://github.com/v2fly/domain-list-community/blob/master/data/cainiao). Platform attribution and delivery-data sharing do not prove an app always contacts these domains.
-
-## Coverage and unresolved candidates
-
-The list adds web-login siblings, WeChat developer resources, the Pay .cn domain, Alipay DNS/regional products, legacy Taobao CDNs and Cainiao. Shared resources can match other products. Regional Alipay domains are included under the same chosen policy, even when they are not needed by mainland-app sessions.
-
-No real-client login, payment, upload or voice/video call was tested. IP-only connections, peer-to-peer media and arbitrary merchant/mini-program backends remain gaps. Existing GEOIP or other rules may handle some traffic outside this list, but that is not a completeness guarantee.
-
-The supplied report leaves short-link/streaming/cloud candidates (mmbizurl.cn, wxaurl.cn, wxmpurl.cn, wxlivecdn.com, wxgateway.com and wxcloudrun.com), additional Alipay development/internal domains and ambiguous Xianyu domains inactive pending evidence. It also leaves specific shared captcha/support/push hosts for future review; being shared alone is not evidence that a host is unnecessary.
-
-No broad qq.com, gtimg.com, aliyuncs.com, cloud ASN or old device-specific IP inventory is newly imported. Existing uncertain baseline entries, including slife.xy-asia.com, remain explicitly preserved. New research must not silently delete or narrow the user's maintained baseline.
+| Source | Active source lines | Newly added after earlier sources | Snapshot SHA-256 |
+| --- | ---: | ---: | --- |
+| [NobyDa / WeChat](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/WeChat.list) | 341 | 318 | `f6ab694f5cbdd28294279ca58541bcb310e1b208d50314f94470cc05ba1ee99d` |
+| [Coldvvater / WeChat](https://raw.githubusercontent.com/Coldvvater/Mononoke/refs/heads/master/Surge/Rules/WeChat.list) | 33 | 1 | `6f84eb140617a7335da7358f3eed6f475552e1925a0182e097ea5886b60a2086` |
+| [blackmatrix7 / WeChat](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list) | 332 | 54 | `01e55617280a7b03db13397fcd2fe4bb3be559f728145fb1fbb054036d75d0bc` |
+| [blackmatrix7 / AliPay](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AliPay/AliPay.list) | 21 | 13 | `23d7ca5404f4795d485b4ea700f45e1d94f2dbf0f2871eeca5298cfce81ff5be` |
+| [blackmatrix7 / Alibaba](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Alibaba/Alibaba.list) | 58 | 58 | `3d605a61b5d0789ca3835c0a040f8d764dff1ec325ff9857af3720658a20e6de` |
+| [blackmatrix7 / JingDong](https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/JingDong/JingDong.list) | 249 | 249 | `0b7a01784c5dfdb1a18d9051f4872c4078c6d5deb6a24f71bfe2bc06d96bb02a` |
 
 ## Validation
 
-All 39 original rule strings are present; all 17 additions are accounted for. Syntax, duplicates and suffix-covered redundancy were checked. This validates rule structure and preservation, not live application connectivity.
+Combined rules: 749. Original baseline: 56/56 retained. All six source rule sets are subsets of the combined rule set. Type/field and IP parse checks passed; identical duplicates are absent. No Surge runtime, payment, login or call test was performed. USER-AGENT and process matching depend on platform and available metadata. The AI and overseas-bank files are unchanged.
+
+Rule counts by type:
+
+- DOMAIN: 13
+- DOMAIN-KEYWORD: 233
+- DOMAIN-SUFFIX: 319
+- IP-ASN: 1
+- IP-CIDR: 56
+- IP-CIDR6: 124
+- PROCESS-NAME: 1
+- USER-AGENT: 2
