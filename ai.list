@@ -1,54 +1,257 @@
-# AI rule set for Surge
-# User-supplied domains and networks; service ownership and completeness are not verified.
-# Shared-service rules also match traffic from other products using those domains.
-# Select the outbound policy in the referencing RULE-SET line.
+# AI service domains for Surge RULE-SET
+# Reviewed: 2026-11-23 (Asia/Singapore)
+# Service-scoped domains from supplied research; official and community evidence are mixed.
+# Shared third parties are in optional-dependencies.list
+# IP rules are separate in optional-ips.list; unresolved entries are documented in REVIEW.md
+# Review scope, evidence and exclusions: REVIEW.md
+# This list is not claimed to be complete.
 
-# Claude / Anthropic domains
-DOMAIN-SUFFIX,claude.ai
+# ----- Anthropic / Claude -----
+# Official: https://code.claude.com/docs/en/network-config
+# Official IPs (not included here): https://platform.claude.com/docs/en/api/ip-addresses
 DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claudeusercontent.com
-DOMAIN-SUFFIX,claude.app
 DOMAIN-SUFFIX,claudemcpcontent.com
 DOMAIN-SUFFIX,clau.de
-DOMAIN-SUFFIX,claudemcpclient.com
-DOMAIN-SUFFIX,claude.dev
-DOMAIN-SUFFIX,claude.site
-DOMAIN-SUFFIX,claudeacademy.com
-DOMAIN-SUFFIX,claude.new
 DOMAIN-SUFFIX,ant.dev
-DOMAIN-SUFFIX,anthropic.team
-DOMAIN-SUFFIX,antspace.dev
-DOMAIN-SUFFIX,chatbotclaude.com
-DOMAIN-SUFFIX,claudepages.dev
-DOMAIN-SUFFIX,claudestudio.com
 
-# Claude / Supporting services (may be shared with other products)
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN-SUFFIX,intercomassets.com
-DOMAIN-SUFFIX,intercom-messenger.com
-DOMAIN-SUFFIX,us5.datadoghq.com
-DOMAIN-SUFFIX,browser-intake-us5-datadoghq.com
-DOMAIN-SUFFIX,r.stripe.com
-DOMAIN-SUFFIX,us.sentry.io
-DOMAIN-SUFFIX,siftscience.com
-DOMAIN-SUFFIX,fcmtoken.googleapis.com
-DOMAIN-SUFFIX,servd-anthropic-website.b-cdn.net
-DOMAIN-SUFFIX,anthropic.auth0.com
-DOMAIN-SUFFIX,anthropic-com.ghost.io
-DOMAIN-SUFFIX,anthropic.com.cdn.cloudflare.net
+# ----- OpenAI / ChatGPT / Sora / Codex -----
+# Official allowlist: https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,oaistatsig.com
+DOMAIN,cdn.openaimerge.com
+# Community-listed OpenAI-specific Azure / CDN hostnames; not in the checked official allowlist
+DOMAIN,openaiapi-site.azureedge.net
+DOMAIN,production-openaicom-storage.azureedge.net
+DOMAIN,openaicomproductionae4b.blob.core.windows.net
+DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+DOMAIN,openaiassets.blob.core.windows.net
+DOMAIN,openaicom.imgix.net
+DOMAIN,chat.openai.com.cdn.cloudflare.net
+# Voice media path on LiveKit (OpenAI-specific hostname only)
+DOMAIN,chatgpt.livekit.cloud
+# Community product / short domains; not in the checked official allowlist
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,chat.com
+DOMAIN-SUFFIX,openai.org
 
-# Claude / Verification, identity and analytics (shared services)
-DOMAIN-SUFFIX,hcaptcha.com
-DOMAIN-SUFFIX,challenges.cloudflare.com
-DOMAIN-SUFFIX,withpersona.com
-DOMAIN-SUFFIX,yoti.com
-DOMAIN-SUFFIX,statsigapi.net
-DOMAIN-SUFFIX,usefathom.com
+# ----- Google Gemini / AI Studio / NotebookLM / Antigravity -----
+# Official Gemini app firewall: https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/gemini-app-firewall-settings
+# Official Antigravity enterprise allowlist: https://antigravity.google/docs/enterprise/
+# Do not use DOMAIN-SUFFIX,googleapis.com or DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,gemini.google
+DOMAIN,gemini.gstatic.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN,ai.google.dev
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN,notebooklm.cloud.google.com
+DOMAIN-SUFFIX,notebook.google.com
+DOMAIN-SUFFIX,notebook.google
+DOMAIN-SUFFIX,jules.google.com
+DOMAIN-SUFFIX,jules.google
+DOMAIN,jules.googleapis.com
+DOMAIN-SUFFIX,antigravity.google.com
+DOMAIN-SUFFIX,antigravity.google
+DOMAIN-SUFFIX,antigravity-unleash.goog
+DOMAIN-SUFFIX,flow.google.com
+DOMAIN-SUFFIX,flow.google
+DOMAIN,labs.google
+DOMAIN,labs.google.com
+DOMAIN-SUFFIX,opal.google.com
+DOMAIN-SUFFIX,opal.google
+DOMAIN-SUFFIX,opal.goog
+DOMAIN-SUFFIX,opal.withgoogle.com
+DOMAIN,stitch.withgoogle.com
+# Product-specific API / client hosts under shared Google parents
+DOMAIN,generativelanguage.googleapis.com
+DOMAIN,generativelanguage.mtls.googleapis.com
+DOMAIN-SUFFIX,geller-pa.googleapis.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN,robinfrontend-pa.googleapis.com
+DOMAIN-SUFFIX,aisandbox-pa.googleapis.com
+DOMAIN,cloudcode-pa.googleapis.com
+DOMAIN,daily-cloudcode-pa.googleapis.com
+DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
+DOMAIN,businessaicode.googleapis.com
+DOMAIN,businessaicode.us.rep.googleapis.com
+DOMAIN,businessaicode.eu.rep.googleapis.com
+DOMAIN,businessaicode.mtls.googleapis.com
+DOMAIN,antigravity.googleapis.com
+DOMAIN,antigravity-pa.googleapis.com
+DOMAIN,aida.googleapis.com
+DOMAIN,aicode.googleapis.com
+DOMAIN,cloudaicompanion.googleapis.com
+DOMAIN,notebooklm.googleapis.com
+DOMAIN,notebooklm-pa.googleapis.com
+DOMAIN,alkalicore-pa.clients6.google.com
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com
+DOMAIN,geminiweb-pa.clients.google.com
+DOMAIN,geminiweb-pa.clients6.google.com
+DOMAIN,appsgenaiserver-pa.clients.google.com
+DOMAIN,appsgenaiserver-pa.clients6.google.com
+DOMAIN,appsgenaiserver-pa.googleapis.com
+DOMAIN,appcatalyst.pa.googleapis.com
+DOMAIN,labstailwind.pa.googleapis.com
 
-# Claude / User-supplied IP networks
-IP-CIDR,34.8.0.0/16,no-resolve
-IP-CIDR,160.79.104.0/21,no-resolve
-IP-CIDR,153.61.208.0/20,no-resolve
-IP-CIDR,153.61.224.0/22,no-resolve
+# ----- xAI / Grok -----
+# Official CLI/enterprise network: https://docs.x.ai/build/enterprise
+# Cursor official sign-in (Grok account hosts): https://cursor.com/help/troubleshooting/sign-in-domains
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,grokusercontent.com
+DOMAIN-SUFFIX,grokipedia.com
+DOMAIN,grok.x.com
+
+# ----- Perplexity -----
+# No official client allowlist found; community: v2fly, dler-io, VPSDance
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,perplexity.com
+DOMAIN-SUFFIX,pplx.ai
+
+DOMAIN,ppl-ai-file-upload.s3.amazonaws.com
+
+DOMAIN,pplx-res.cloudinary.com
+
+# ----- Microsoft Copilot -----
+# Official app allowlist does not list chat hosts; it defers to Microsoft 365 endpoints
+# and only enumerates update + sign-in. Chat hosts below are from community (dler-io, blackmatrix7).
+# Official article: https://learn.microsoft.com/en-us/copilot/plan/add-copilot-endpoints-allowlist
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+DOMAIN-SUFFIX,copilot.com
+DOMAIN,sydney.bing.com
+DOMAIN,gateway.bingviz.microsoft.net
+DOMAIN,gateway.bingviz.microsoftapp.net
+
+# ----- GitHub Copilot -----
+# Official: https://docs.github.com/en/copilot/reference/copilot-allowlist-reference
+# Do not add github.com, api.github.com, or *.githubusercontent.com
+DOMAIN-SUFFIX,githubcopilot.com
+DOMAIN,copilot-proxy.githubusercontent.com
+DOMAIN,origin-tracker.githubusercontent.com
+DOMAIN,copilot-telemetry.githubusercontent.com
+DOMAIN,copilot-telemetry-service.githubusercontent.com
+DOMAIN,copilot-workspace.githubnext.com
+
+DOMAIN,copilot-reports.github.com
+
+DOMAIN,production-copilot-host-centralus.webpubsub.azure.com
+
+DOMAIN,production-copilot-host-centralus-02.webpubsub.azure.com
+
+DOMAIN,production-copilot-host-eastasia.webpubsub.azure.com
+
+DOMAIN,production-copilot-host-austriaeast.webpubsub.azure.com
+
+DOMAIN,production-copilot-host-westus.webpubsub.azure.com
+
+DOMAIN,production-copilot-host-westus3.webpubsub.azure.com
+
+DOMAIN,production-copilot-host.webpubsub.azure.com
+
+# ----- Cursor -----
+# Official network: https://cursor.com/docs/enterprise/network-configuration
+# Official sign-in (accounts.spacexsi.com required after 2026-11-30):
+# https://cursor.com/help/troubleshooting/sign-in-domains
+# DOMAIN-SUFFIX,cursorvm.com also matches nested hosts such as agent.region.cursorvm.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor-cdn.com
+DOMAIN-SUFFIX,cursorapi.com
+DOMAIN-SUFFIX,cursorvm.com
+DOMAIN-SUFFIX,spacexsi.com
+DOMAIN,accounts.spacex.ai
+DOMAIN,cursor.blob.core.windows.net
+
+DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com
+
+# ----- Windsurf / Codeium (legacy; desktop docs now live under Devin) -----
+# Official Devin Desktop FAQ: https://docs.devin.ai/desktop/devin-desktop-faq
+# SukkaW adds inference/self-serve API hosts; v2fly adds windsurf.build
+DOMAIN-SUFFIX,windsurf.com
+DOMAIN-SUFFIX,codeium.com
+DOMAIN-SUFFIX,codeiumdata.com
+DOMAIN-SUFFIX,windsurf.build
+DOMAIN,static.devin.ai
+DOMAIN,app.devin.ai
+DOMAIN,api.devin.ai
+DOMAIN,docs.devin.ai
+
+# ----- Poe -----
+# Official API: https://creator.poe.com/api-reference/overview
+# Community CDN: v2fly data/poe
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,poecdn.net
+
+# ----- DeepSeek -----
+# Official API docs (fetched 2026-11-23): https://api-docs.deepseek.com/
+# Community: v2fly data/deepseek
+DOMAIN-SUFFIX,deepseek.com
+DOMAIN-SUFFIX,deepseeksvc.com
+
+# ----- Doubao (ByteDance) -----
+# Official web: https://www.doubao.com/chat/ (fetched 2026-11-23)
+# Official Ark Chat API: https://docs.volcengine.com/docs/ark/chat-api
+# Do not add DOMAIN-SUFFIX,volces.com or DOMAIN-SUFFIX,volcengine.com
+DOMAIN-SUFFIX,doubao.com
+DOMAIN-SUFFIX,doubaocdn.com
+DOMAIN-SUFFIX,doubaoapps.com
+DOMAIN,ark.cn-beijing.volces.com
+DOMAIN,ark.volcengine.com
+
+# ----- Qwen / Tongyi -----
+# Official sites fetched: https://qwen.ai/ , https://chat.qwen.ai/
+# Community (v2fly category-ai-cn, VPSDance alibaba-ai handwritten)
+# dashscope.aliyuncs.com is the standard official API host; the help page body did not render fully
+DOMAIN-SUFFIX,qwen.ai
+DOMAIN-SUFFIX,qwenlm.ai
+DOMAIN,tongyi.aliyun.com
+DOMAIN,qianwen.aliyun.com
+DOMAIN-SUFFIX,qianwen.com
+DOMAIN-SUFFIX,qianwenai.com
+DOMAIN-SUFFIX,tongyi.com
+# Workspace-specific Beijing Model Studio API, confirmed in official overview.
+# https://help.aliyun.com/zh/model-studio/what-is-model-studio
+DOMAIN-SUFFIX,cn-beijing.maas.aliyuncs.com
+DOMAIN,dashscope.aliyuncs.com
+DOMAIN,bailian.console.aliyun.com
+
+# ----- Kimi / Moonshot -----
+# Official API: https://platform.kimi.com/docs/api/overview (base https://api.moonshot.cn)
+# Official web https://kimi.moonshot.cn/ redirects to https://www.kimi.com/ (fetched 2026-11-23)
+DOMAIN-SUFFIX,kimi.com
+DOMAIN-SUFFIX,moonshot.cn
+DOMAIN-SUFFIX,moonshot.ai
+
+# ----- Zhipu / GLM -----
+# Official platform docs: https://docs.bigmodel.cn/ (fetched 2026-11-23)
+# chatglm.cn fetched; z.ai / zhipuai.cn / zhipucn.com from v2fly category-ai-cn
+DOMAIN-SUFFIX,bigmodel.cn
+DOMAIN-SUFFIX,chatglm.cn
+DOMAIN-SUFFIX,zhipuai.cn
+DOMAIN-SUFFIX,zhipucn.com
+DOMAIN-SUFFIX,z.ai
+
+# ----- MiniMax / Hailuo -----
+# Official docs: https://platform.minimax.cn/docs/guides/text-generation
+# Official API base: https://api.minimax.cn
+# Community also lists minimaxi.com / hailuoai.com (v2fly category-ai-cn, VPSDance)
+DOMAIN-SUFFIX,minimax.cn
+DOMAIN-SUFFIX,minimaxi.com
+DOMAIN-SUFFIX,minimax.io
+DOMAIN-SUFFIX,minimax.chat
+DOMAIN-SUFFIX,hailuoai.com
+DOMAIN-SUFFIX,xingyeai.com

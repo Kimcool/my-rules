@@ -1,34 +1,38 @@
 # My Rules
 
-Personal Surge rule sets, maintained as small overrides alongside public rule sets.
+Personal Surge rule sets. AI entries are grouped by provider, covering 16 provider sections including Chinese and international services. Official and community sources are mixed; see [review and limitations](REVIEW.md).
 
-| File | Purpose | Subscription |
-| --- | --- | --- |
-| `proxy.list` | Personal proxy overrides (initially empty) | [Raw](https://raw.githubusercontent.com/Kimcool/my-rules/main/proxy.list) |
-| `direct.list` | Personal direct overrides (initially empty) | [Raw](https://raw.githubusercontent.com/Kimcool/my-rules/main/direct.list) |
-| `ai.list` | AI services, grouped by provider (Claude first) | [Raw](https://raw.githubusercontent.com/Kimcool/my-rules/main/ai.list) |
+| File | Purpose |
+| --- | --- |
+| [ai.list](ai.list) | Service-scoped AI domains, including dedicated hosts on shared clouds |
+| [optional-dependencies.list](optional-dependencies.list) | Shared login, verification, support, download and telemetry services; opt in deliberately |
+| [optional-ips.list](optional-ips.list) | Official Claude API/Console inbound IP ranges; opt in if needed |
+| [proxy.list](proxy.list) | Personal proxy overrides (initially empty) |
+| [direct.list](direct.list) | Personal direct overrides (initially empty) |
 
-## Use in Surge
+## Subscribe
 
-Add the following lines to your existing `[Rule]` section, before broader public rules and `FINAL`. Replace `Proxy` and `AI` with existing policy group names in your profile.
+Add to your existing `[Rule]` section before broader rules and `FINAL`. Replace `AI` and `Proxy` with existing policy names. These are fragments, not a complete profile.
 
 ```ini
 RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/direct.list,DIRECT
-RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/ai.list,AI
 RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/proxy.list,Proxy
+RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/ai.list,AI
 ```
 
-The proxy and direct lists intentionally contain only comments until you add personal overrides. The AI list starts with user-supplied Claude domains and IP networks, organized into commented sections. It replaces the former `meta.list`; update existing subscriptions to `ai.list`. Domain ownership and completeness have not been independently verified. Shared support, verification and analytics domains can also route traffic from other products. IP rules use `no-resolve` to avoid triggering DNS resolution solely for matching these networks.
+Optional additions, after the main domain rules:
+
+```ini
+RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/optional-dependencies.list,AI
+RULE-SET,https://raw.githubusercontent.com/Kimcool/my-rules/main/optional-ips.list,AI
+```
+
+Shared dependencies also affect non-AI traffic. Review the file before subscribing wholesale, or copy only needed rules into personal overrides. They can be required by a feature while already covered by your general routing policy. Domestic services in ai.list use the same chosen policy; put deliberate exceptions in direct.list first. Rule matching does not guarantee regional access, account eligibility, WebSocket or voice connectivity.
 
 ## Maintain
 
-Edit the appropriate `.list` file on GitHub and commit to `main`, then refresh external rule sets in Surge. Remote content may be cached; changes are not necessarily immediate.
+Edit a list and commit to main, then refresh external rule sets in Surge. Remote caching may delay updates. Keep one rule per line, with no policy component. DOMAIN matches an exact host; DOMAIN-SUFFIX includes the domain and its subdomains. Prefer exact hosts on shared platforms. Add a source comment and avoid suffix-covered duplicates. Never add credentials or private configuration.
 
-- `DOMAIN,example.com` matches that exact domain.
-- `DOMAIN-SUFFIX,example.com` matches the domain and its subdomains.
-- Use `#` for comments and keep one rule per line.
-- Do not include a policy name, URL scheme, or URL path in domain entries.
-- Avoid duplicate or conflicting entries across lists; the first matching rule wins.
-- Keep credentials, node subscriptions, and private configuration out of this public repository.
+The ai.list subscription URL is unchanged. The former meta.list is no longer maintained. The previous Claude-only list was replaced; unverified aliases and broad IP ranges are explained in REVIEW.md. No installed Surge profile is changed by editing this repository.
 
 Reference: [Surge rule sets](https://manual.nssurge.com/rules/ruleset.html).
