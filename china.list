@@ -1,61 +1,175 @@
 # China everyday services for Surge RULE-SET
-# Created: 2026-11-23 (Asia/Singapore)
-# Suggested policy: DIRECT, assigned in the profile rather than this file.
-# Domain-based starter coverage; not a guarantee of all mobile/voice/payment paths.
-# Mini-programs and merchants can use their own domains outside this list.
+# Research supplied by user; generated: 2026-11-23 13:04 (Asia/Shanghai, UTC+8)
+# Imported and structurally checked: 2026-11-23 (Asia/Singapore)
+# Research observations and fetch claims below belong to the supplied report,
+# not an independent repeat of every lookup. See CHINA-REVIEW.md.
+# Format: Surge RULE-SET without policy names. Suggested profile policy: DIRECT.
+# DIRECT is only the intended profile policy; this file does not validate every network environment.
+# Domain-based, evidence-traced coverage. This is not a packet-capture verification of
+# WeChat, WeChat Pay, Alipay, Taobao, Tmall, or Xianyu/Goofish clients in this run.
+# Mini programs and merchant web pages may use arbitrary third-party domains not listed here.
+# A fixed list cannot cover all of them.
+# Shared CDN, login, risk-control, analytics, and map hosts may also serve other Tencent or
+# Alibaba products; impact is noted in section comments.
+# Baseline preserved from https://raw.githubusercontent.com/Kimcool/my-rules/main/china.list
+# (starter dated 2026-11-23). No existing match range was narrowed or deleted.
+# No PROCESS-NAME, USER-AGENT, DOMAIN-KEYWORD, or URL-REGEX rules.
+# No IP-CIDR / IP-CIDR6 adopted; see comments under WeChat voice/video and CHINA-REVIEW.md.
 
-# ----- WeChat / Weixin / WeChat Pay -----
-# Community source (domain rules only; upstream header dated 2025-06-06):
-# https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/WeChat/WeChat.list
-# Includes shared Tencent resources such as qpic.cn, qlogo.cn and map.qq.com.
-DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
-DOMAIN,dldir1.qq.com
-DOMAIN,slife.xy-asia.com
-DOMAIN,soup.v.qq.com
-DOMAIN,vweixinf.tc.qq.com
+# ----- WeChat / Weixin -----
+# Login / account / safety
+# weixin.qq.com covers official sites and most client hosts (mp, pay, open, long, short, dns, Channels).
+# It also matches WeCom web hosts such as work.weixin.qq.com; that is existing baseline range, not a WeCom IP allowlist.
+# weixin110.qq.com is a sibling under qq.com, not a subdomain of weixin.qq.com.
 DOMAIN,weixin110.qq.com
-DOMAIN,wup.imtt.qq.com
-DOMAIN-SUFFIX,iot-tencent.com
-DOMAIN-SUFFIX,lbs.gtimg.com
-DOMAIN-SUFFIX,map.qq.com
-DOMAIN-SUFFIX,qlogo.cn
-DOMAIN-SUFFIX,qpic.cn
-DOMAIN-SUFFIX,servicewechat.com
-DOMAIN-SUFFIX,tenpay.com
-DOMAIN-SUFFIX,up-hl.3g.qq.com
-DOMAIN-SUFFIX,vweixinthumb.tc.qq.com
-DOMAIN-SUFFIX,wechat.com
-DOMAIN-SUFFIX,wechatlegal.net
-DOMAIN-SUFFIX,wechatos.net
-DOMAIN-SUFFIX,wechatpay.com
-DOMAIN-SUFFIX,weixin.com
 DOMAIN-SUFFIX,weixin.qq.com
+DOMAIN-SUFFIX,weixin.com
+DOMAIN-SUFFIX,wechat.com
+# Community-cited WeChat HTTPDNS suffix. Not covered by weixin.qq.com.
+DOMAIN-SUFFIX,weixin.qq.com.cn
+# Product-specific login host on shared tencent-cloud.net. Do not expand to the whole tencent-cloud.net root.
+DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
 DOMAIN-SUFFIX,weixinbridge.com
 DOMAIN-SUFFIX,weixinsxy.com
-DOMAIN-SUFFIX,wx.gtimg.com
+# Baseline community suffixes; kept. wechatlegal.net / wechatos.net were not independently re-verified in official docs this run.
+DOMAIN-SUFFIX,wechatlegal.net
+DOMAIN-SUFFIX,wechatos.net
+
+# Messaging / long connection
+# Most long/short/quic/finder hosts are subdomains of weixin.qq.com or wechat.com (already listed).
+# WeChat web messenger official titles observed on 2026-11-23: "微信网页版" at wx2.qq.com and wx8.qq.com.
+# DOMAIN-SUFFIX,wx.qq.com does not match wx2.qq.com or wx8.qq.com.
 DOMAIN-SUFFIX,wx.qq.com
+DOMAIN-SUFFIX,wx2.qq.com
+DOMAIN-SUFFIX,wx8.qq.com
+# Baseline host on a shared Tencent Mobile QQ / TBS interface. Kept; purpose not officially documented this run.
+DOMAIN,wup.imtt.qq.com
+# Long connections and some call paths may also connect to raw IPs (no hostname).
+# No IP-CIDR is adopted: candidate ranges are dated, shared, WeCom/face-pay-specific, or over-broad. See CHINA-REVIEW.md.
+
+# Images / video / files / Moments
+# qpic.cn and qlogo.cn are shared Tencent image/avatar CDNs (WeChat Moments, official accounts, and other Tencent apps).
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,qlogo.cn
+# WeChat-specific hosts on the shared tc.qq.com media platform. Do not expand to all of tc.qq.com or qq.com.
+DOMAIN,vweixinf.tc.qq.com
+DOMAIN-SUFFIX,vweixinthumb.tc.qq.com
 DOMAIN-SUFFIX,wxapp.tc.qq.com
-DOMAIN-SUFFIX,wxs.qq.com
+DOMAIN-SUFFIX,up-hl.3g.qq.com
 DOMAIN-SUFFIX,yun-hl.3g.qq.com
+# Baseline community host on Tencent Video (v.qq.com). Shared; kept, not expanded to v.qq.com.
+DOMAIN,soup.v.qq.com
+
+# Official accounts / Channels
+# mp.weixin.qq.com, channels.weixin.qq.com and most related API hosts are covered by weixin.qq.com.
+# Short-link brands such as mmbizurl.cn / wxaurl.cn / wxmpurl.cn are recorded in CHINA-REVIEW.md (community/v2fly only this run).
+
+# Mini programs (host platform only; third-party app domains not listed)
+DOMAIN-SUFFIX,servicewechat.com
+DOMAIN-SUFFIX,wxs.qq.com
+# WeChat cloud / mini program / devtools hosts observed on official WeChat pages (e.g. res.wxqcloud.qq.com.cn).
+# WeChat-specific label on a qq.com.cn platform; do not expand to all of qq.com.cn or myqcloud.com.
+DOMAIN-SUFFIX,wxqcloud.qq.com.cn
+
+# Voice / video calls
+# Client long-connection and some signaling hosts fall under weixin.qq.com / wechat.com.
+# Community and technical write-ups say VoIP may use UDP P2P or relay to raw IPs.
+# Official face-pay terminal docs also list raw long-connection IPs, but those are for face-pay devices,
+# last updated 2022-11-14, and are not adopted as personal WeChat client rules.
+# iot-tencent.com is a baseline suffix; official WeChat Face Pay docs (terminal allowlist) also name it.
+# Shared with WeChat IoT / face-pay devices, not only the personal app.
+DOMAIN-SUFFIX,iot-tencent.com
+
+# App update / download
+# Tencent client download CDNs linked from the official weixin.qq.com homepage on 2026-11-23.
+# Shared with other Tencent client installers; not expanded to all of qq.com.
+DOMAIN,dldir1.qq.com
+DOMAIN,dldir1v6.qq.com
+
+# Maps / location (shared Tencent Map / gtimg services used by WeChat)
+# Also used by other Tencent maps-enabled apps. Do not expand to all of gtimg.com or qq.com.
+DOMAIN-SUFFIX,map.qq.com
+DOMAIN-SUFFIX,lbs.gtimg.com
+DOMAIN-SUFFIX,wx.gtimg.com
+
+# Baseline community host of unclear product role (xy-asia.com). Kept; see CHINA-REVIEW.md / CHINA-REVIEW.md.
+DOMAIN,slife.xy-asia.com
+
+# ----- WeChat Pay / Tenpay -----
+# Pay, receive, verification, bills, and merchant API hosts under weixin.qq.com (e.g. pay.weixin.qq.com,
+# api.mch.weixin.qq.com, api2.mch.weixin.qq.com, payapp.weixin.qq.com) are already covered above.
+# tenpay.com is the Tenpay platform (also used by other Tencent payment surfaces).
+DOMAIN-SUFFIX,tenpay.com
+DOMAIN-SUFFIX,wechatpay.com
+# Official WeChat Pay domain: docs and static CDN (gtimg.wechatpay.cn), merchant API backups
+# (api.wechatpay.cn, api2.wechatpay.cn, payapp.wechatpay.cn, etc.), and official face-pay allowlist.
+# Merchant API hosts are primarily server-side destinations; the suffix also covers client-facing Pay pages.
+DOMAIN-SUFFIX,wechatpay.cn
 
 # ----- Alipay -----
-# Official service agreement: https://cschannel.alipay.com/mobile/helpDetail.htm?help_id=201602698273
+# Login, QR scan, pay, transfer, bills, mini programs, identity, risk control, and most API gateways
+# (including render.alipay.com, openapi.alipay.com, mobilegw.alipay.com) are covered by alipay.com.
+# Official service agreement (fetched 2026-11-23) defines the Alipay website as www.alipay.com and/or the client.
 DOMAIN-SUFFIX,alipay.com
-# Resource domain observed on https://www.alipay.com/ on 2026-11-23.
+# Official and page-referenced static / resource CDN (a/gw/i/mdn.alipayobjects.com on Alipay pages).
 DOMAIN-SUFFIX,alipayobjects.com
+# Community + v2fly Alipay DNS / resolution domain; official IoT allowlist pages cite *.alipaydns.com
+# in search snippets, but those opendoc pages were JavaScript shells and the body was not readable this run.
+DOMAIN-SUFFIX,alipaydns.com
+# Additional official-style Alipay product suffixes used in v2fly / Sukka / blackmatrix7 AliPay lists.
+DOMAIN-SUFFIX,alipay.cn
+DOMAIN-SUFFIX,alipay.com.cn
+# Regional Alipay products (Hong Kong, Alipay+, Macao). Shared Alipay family; not required for every
+# mainland-app session, but they are product domains rather than generic Aliyun roots.
+DOMAIN-SUFFIX,alipay.hk
+DOMAIN-SUFFIX,alipayplus.com
+DOMAIN-SUFFIX,alipaymo.com
 
-# ----- Taobao / Tmall / Goofish -----
-# Core domains from the Alipay service agreement above.
+# ----- Taobao -----
+# Official Alipay service agreement (2026-11-23) names taobao.com as Taobao. Covers login, search,
+# cart, order, many APIs, live, and most "*.taobao.com" hosts (including 2.taobao.com).
 DOMAIN-SUFFIX,taobao.com
+# Classic Taobao CDNs. Widely listed by v2fly, Sukka, and ACL4SSR. Official open-platform article
+# 120157 is cited as naming taobaocdn.com / tbcdn.cn, but the article body was not retrievable (portal shell).
+DOMAIN-SUFFIX,taobaocdn.com
+DOMAIN-SUFFIX,tbcdn.cn
+# Ali CDN scheduling / cache hostname used with Taobao properties. Also serves other Alibaba CDN traffic.
+DOMAIN-SUFFIX,tbcache.com
+
+# ----- Tmall -----
+# Official Alipay service agreement names tmall.com as Tmall.
 DOMAIN-SUFFIX,tmall.com
-DOMAIN-SUFFIX,goofish.com
-# Tmall international storefront linked by https://www.taobao.com/.
+# Tmall international storefront linked from www.taobao.com and www.tmall.com on 2026-11-23.
 DOMAIN-SUFFIX,tmall.hk
 
-# ----- Shared shopping resources / analytics / advertising -----
-# Hosts observed in Taobao and Goofish homepage HTML on 2026-11-23.
-# These domains/hosts can also serve other Alibaba products.
+# ----- Xianyu / Goofish -----
+# Official Alipay service agreement and Xianyu privacy policy define the Xianyu community domain as goofish.com.
+DOMAIN-SUFFIX,goofish.com
+# Keyboard-looking domains and xianyu.mobi from blackmatrix7 XianYu.list are not adopted; see CHINA-REVIEW.md.
+
+# ----- Shared dependencies -----
+# The following also serve other Alibaba or Tencent products. Included because they are referenced by
+# the in-scope services (pages and/or consistent community/official lists). Impact is broader than
+# WeChat / Alipay / Taobao / Tmall / Xianyu alone.
+
+# Alibaba CDN used by Taobao, Tmall, Goofish, and the Alipay homepage (img.alicdn.com) on 2026-11-23.
+# Also serves other Alibaba apps. Do not expand to aliyuncs.com, aliyun.com, or Aliyun ASNs.
 DOMAIN-SUFFIX,alicdn.com
+# Alibaba analytics / telemetry (gm/log/res.mmstat.com observed on Taobao, Tmall, and Goofish homepages).
 DOMAIN-SUFFIX,mmstat.com
+# Advertising hosts observed in Taobao and Tmall homepage HTML on 2026-11-23.
+# Not expanded to all of tanx.com; only these two baseline hosts are enabled.
 DOMAIN,dfhs.tanx.com
 DOMAIN,ecpm.tanx.com
+# Official Cainiao domains. Xianyu privacy policy (fetched 2026-11-23) states delivery data is shared
+# with Zhejiang Cainiao Supply Chain for fulfillment. Community lists include these for Taobao logistics.
+# This is company/platform attribution plus a data-sharing statement, not a client packet capture.
+# Also serves the Cainiao app and other merchants' logistics. Do not expand to all Alibaba logistics brands.
+DOMAIN-SUFFIX,cainiao.com
+DOMAIN-SUFFIX,cainiao.com.cn
+
+# ----- IP CIDRs (client destinations only; no-resolve) -----
+# None adopted in this revision.
+# WeChat long-connection / VoIP may use raw IPs; community DOMAIN-KEYWORD prefixes, ASN 132203,
+# WeCom allowlists, 2022 face-pay terminal IPs, and broad Tencent/Alibaba clouds were all rejected.
+# Candidates and reasons: CHINA-REVIEW.md.

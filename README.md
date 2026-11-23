@@ -5,7 +5,7 @@ Personal Surge rule sets. AI entries are grouped by provider, covering 16 provid
 | File | Purpose |
 | --- | --- |
 | [ai.list](ai.list) | All 293 rules, including the full original Claude baseline, other providers, shared dependencies and IP ranges |
-| [china.list](china.list) | WeChat/WeChat Pay, Alipay, Taobao/Tmall/Goofish and related resources; suggested DIRECT |
+| [china.list](china.list) | 56 rules for WeChat/WeChat Pay, Alipay, Taobao/Tmall/Goofish and related resources; suggested DIRECT |
 | [outbank.list](outbank.list) | HSBC, Elephant Bank, ZA Bank and Wise; converted from yeahwu Bank.list |
 | [proxy.list](proxy.list) | Personal proxy overrides (initially empty) |
 | [direct.list](direct.list) | Personal direct overrides (initially empty) |
@@ -33,7 +33,7 @@ Reference: [Surge rule sets](https://manual.nssurge.com/rules/ruleset.html).
 
 ## China services scope
 
-china.list is a separate subscription for the requested everyday services, not a complete mainland-China routing database. WeChat domains come from the linked community rule source; Alipay and shopping domains are supported by the official agreement and homepage resource inspection cited in the list. Shared Tencent/Alibaba resources also affect other products. No broad qq.com, aliyuncs.com or cloud IP/ASN rules are included. IP-only connections, voice/video calls, merchant sites and third-party mini-program backends may need additional observed rules. No real-device login, payment or call test was performed. Existing AI rules are unchanged.
+china.list contains all 39 original rules plus 17 additions from the supplied research, grouped by service and function. See [China review](CHINA-REVIEW.md) for changes, source boundaries and known gaps. It is not a complete mainland-China routing database. Shared resources affect other products; regional Alipay and Cainiao domains use the same selected policy. No live-client login, payment or call test was performed. The existing AI and overseas-banking lists are unchanged.
 
 ## Overseas banking subscription
 
