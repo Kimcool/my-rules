@@ -1,0 +1,61 @@
+# China everyday services for Surge RULE-SET
+# Created: 2026-11-23 (Asia/Singapore)
+# Suggested policy: DIRECT, assigned in the profile rather than this file.
+# Domain-based starter coverage; not a guarantee of all mobile/voice/payment paths.
+# Mini-programs and merchants can use their own domains outside this list.
+
+# ----- WeChat / Weixin / WeChat Pay -----
+# Community source (domain rules only; upstream header dated 2025-06-06):
+# https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/WeChat/WeChat.list
+# Includes shared Tencent resources such as qpic.cn, qlogo.cn and map.qq.com.
+DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
+DOMAIN,dldir1.qq.com
+DOMAIN,slife.xy-asia.com
+DOMAIN,soup.v.qq.com
+DOMAIN,vweixinf.tc.qq.com
+DOMAIN,weixin110.qq.com
+DOMAIN,wup.imtt.qq.com
+DOMAIN-SUFFIX,iot-tencent.com
+DOMAIN-SUFFIX,lbs.gtimg.com
+DOMAIN-SUFFIX,map.qq.com
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,servicewechat.com
+DOMAIN-SUFFIX,tenpay.com
+DOMAIN-SUFFIX,up-hl.3g.qq.com
+DOMAIN-SUFFIX,vweixinthumb.tc.qq.com
+DOMAIN-SUFFIX,wechat.com
+DOMAIN-SUFFIX,wechatlegal.net
+DOMAIN-SUFFIX,wechatos.net
+DOMAIN-SUFFIX,wechatpay.com
+DOMAIN-SUFFIX,weixin.com
+DOMAIN-SUFFIX,weixin.qq.com
+DOMAIN-SUFFIX,weixinbridge.com
+DOMAIN-SUFFIX,weixinsxy.com
+DOMAIN-SUFFIX,wx.gtimg.com
+DOMAIN-SUFFIX,wx.qq.com
+DOMAIN-SUFFIX,wxapp.tc.qq.com
+DOMAIN-SUFFIX,wxs.qq.com
+DOMAIN-SUFFIX,yun-hl.3g.qq.com
+
+# ----- Alipay -----
+# Official service agreement: https://cschannel.alipay.com/mobile/helpDetail.htm?help_id=201602698273
+DOMAIN-SUFFIX,alipay.com
+# Resource domain observed on https://www.alipay.com/ on 2026-11-23.
+DOMAIN-SUFFIX,alipayobjects.com
+
+# ----- Taobao / Tmall / Goofish -----
+# Core domains from the Alipay service agreement above.
+DOMAIN-SUFFIX,taobao.com
+DOMAIN-SUFFIX,tmall.com
+DOMAIN-SUFFIX,goofish.com
+# Tmall international storefront linked by https://www.taobao.com/.
+DOMAIN-SUFFIX,tmall.hk
+
+# ----- Shared shopping resources / analytics / advertising -----
+# Hosts observed in Taobao and Goofish homepage HTML on 2026-11-23.
+# These domains/hosts can also serve other Alibaba products.
+DOMAIN-SUFFIX,alicdn.com
+DOMAIN-SUFFIX,mmstat.com
+DOMAIN,dfhs.tanx.com
+DOMAIN,ecpm.tanx.com
