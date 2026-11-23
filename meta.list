@@ -1,0 +1,5 @@
+# Starter rules for Facebook and Instagram; not an exhaustive Meta list.
+DOMAIN-SUFFIX,facebook.com
+DOMAIN-SUFFIX,instagram.com
+DOMAIN-SUFFIX,fbcdn.net
+DOMAIN-SUFFIX,cdninstagram.com
