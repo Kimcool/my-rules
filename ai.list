@@ -1,0 +1,54 @@
+# AI rule set for Surge
+# User-supplied domains and networks; service ownership and completeness are not verified.
+# Shared-service rules also match traffic from other products using those domains.
+# Select the outbound policy in the referencing RULE-SET line.
+
+# Claude / Anthropic domains
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,claude.app
+DOMAIN-SUFFIX,claudemcpcontent.com
+DOMAIN-SUFFIX,clau.de
+DOMAIN-SUFFIX,claudemcpclient.com
+DOMAIN-SUFFIX,claude.dev
+DOMAIN-SUFFIX,claude.site
+DOMAIN-SUFFIX,claudeacademy.com
+DOMAIN-SUFFIX,claude.new
+DOMAIN-SUFFIX,ant.dev
+DOMAIN-SUFFIX,anthropic.team
+DOMAIN-SUFFIX,antspace.dev
+DOMAIN-SUFFIX,chatbotclaude.com
+DOMAIN-SUFFIX,claudepages.dev
+DOMAIN-SUFFIX,claudestudio.com
+
+# Claude / Supporting services (may be shared with other products)
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN-SUFFIX,intercomassets.com
+DOMAIN-SUFFIX,intercom-messenger.com
+DOMAIN-SUFFIX,us5.datadoghq.com
+DOMAIN-SUFFIX,browser-intake-us5-datadoghq.com
+DOMAIN-SUFFIX,r.stripe.com
+DOMAIN-SUFFIX,us.sentry.io
+DOMAIN-SUFFIX,siftscience.com
+DOMAIN-SUFFIX,fcmtoken.googleapis.com
+DOMAIN-SUFFIX,servd-anthropic-website.b-cdn.net
+DOMAIN-SUFFIX,anthropic.auth0.com
+DOMAIN-SUFFIX,anthropic-com.ghost.io
+DOMAIN-SUFFIX,anthropic.com.cdn.cloudflare.net
+
+# Claude / Verification, identity and analytics (shared services)
+DOMAIN-SUFFIX,hcaptcha.com
+DOMAIN-SUFFIX,challenges.cloudflare.com
+DOMAIN-SUFFIX,withpersona.com
+DOMAIN-SUFFIX,yoti.com
+DOMAIN-SUFFIX,statsigapi.net
+DOMAIN-SUFFIX,usefathom.com
+
+# Claude / User-supplied IP networks
+IP-CIDR,34.8.0.0/16,no-resolve
+IP-CIDR,160.79.104.0/21,no-resolve
+IP-CIDR,153.61.208.0/20,no-resolve
+IP-CIDR,153.61.224.0/22,no-resolve
