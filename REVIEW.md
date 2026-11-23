@@ -19,11 +19,11 @@ Official pages independently checked:
 - Removed ai.com from OpenAI: its current website describes its own agent platform, not an OpenAI entry point.
 - Moved Copilot-specific Web PubSub and report hosts to the main list, verified against GitHub. A dedicated hostname on a shared cloud is not equivalent to a shared hostname.
 - Applied that same distinction to community-listed Perplexity upload/media and Cursor binary hosts; these remain community evidence.
-- Moved generic Bing resource/API hosts to optional dependencies. Removed exact duplicates and suffix-covered entries across both files.
+- Moved generic Bing resource/API hosts to the shared dependency section. Removed exact duplicates and suffix-covered entries across all sections.
 - Added the Beijing workspace-specific Model Studio API suffix documented by Alibaba. Other regions require separately confirmed endpoints.
 - Corrected the OpenAI Azure/CDN comment: the checked ChatGPT article does not list those hosts; they remain community-derived candidates.
 - Kept Cursor's new sign-in suffix: its official page explicitly recommends it, including related authentication hosts.
-- Replaced the old IP set with a separate opt-in list: 160.79.104.0/23, 153.61.224.0/22 and 2607:6bc0::/48 are documented inbound addresses. 160.79.104.0/21 and 153.61.208.0/20 are documented OUTBOUND source ranges, not the client destination list. Removed unsubstantiated 34.8.0.0/16. This corrects the supplied report's claim that the /20 was not in visible documentation.
+- Replaced the old IP set with the final IP section: 160.79.104.0/23, 153.61.224.0/22 and 2607:6bc0::/48 are documented inbound addresses. 160.79.104.0/21 and 153.61.208.0/20 are documented OUTBOUND source ranges, not the client destination list. Removed unsubstantiated 34.8.0.0/16. This corrects the supplied report's claim that the /20 was not in visible documentation.
 
 ## Deferred and excluded
 
@@ -45,3 +45,7 @@ The main list includes Chinese and international services under one chosen polic
 - [VPSDance](https://github.com/VPSDance/ai-proxy-rules)
 
 These upstream inventories were reported by the supplied research; this review did not independently repeat every upstream or X lookup. Future additions should cite a source and distinguish dedicated hosts from shared hosts.
+
+## Single subscription
+
+At the user's request, service domains, shared dependencies and verified inbound IPs are now combined in ai.list. Provider and dependency comments remain; IP rules follow all domain rules. The two temporary optional list files were removed to keep one maintained AI subscription.

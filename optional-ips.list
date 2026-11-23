@@ -1,6 +1,0 @@
-# Optional Claude API / Console inbound IPs; not outbound MCP source networks.
-# Verified 2026-11-23: https://platform.claude.com/docs/en/api/ip-addresses
-# Place after domain rules. no-resolve avoids DNS solely for these IP matches.
-IP-CIDR,160.79.104.0/23,no-resolve
-IP-CIDR,153.61.224.0/22,no-resolve
-IP-CIDR6,2607:6bc0::/48,no-resolve

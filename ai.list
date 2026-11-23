@@ -1,8 +1,8 @@
 # AI service domains for Surge RULE-SET
 # Reviewed: 2026-11-23 (Asia/Singapore)
 # Service-scoped domains from supplied research; official and community evidence are mixed.
-# Shared third parties are in optional-dependencies.list
-# IP rules are separate in optional-ips.list; unresolved entries are documented in REVIEW.md
+# Includes shared third-party dependencies below; they also match non-AI traffic.
+# Inbound IP rules are at the end; unresolved entries are documented in REVIEW.md.
 # Review scope, evidence and exclusions: REVIEW.md
 # This list is not claimed to be complete.
 
@@ -255,3 +255,189 @@ DOMAIN-SUFFIX,minimax.io
 DOMAIN-SUFFIX,minimax.chat
 DOMAIN-SUFFIX,hailuoai.com
 DOMAIN-SUFFIX,xingyeai.com
+
+# ===== Shared dependencies =====
+# Shared third-party dependencies for AI services
+# Reviewed: 2026-11-23 (Asia/Singapore)
+# Mixed official/community candidates for login, captcha,
+# payment, support, telemetry or uploads. Not all are required by every client.
+# Adding them to an AI policy will also divert non-AI traffic.
+# Do not expand these to root domains such as googleapis.com, cloudflare.com,
+# stripe.com, auth0.com, amazonaws.com, or facebook.com.
+
+# ===== OpenAI / ChatGPT official shared allowlist =====
+# https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
+# Login / enterprise SSO (WorkOS)
+DOMAIN,cdn.workos.com
+DOMAIN,forwarder.workos.com
+DOMAIN,frontend-apps-multi-region.workos.com
+DOMAIN,images.workoscdn.com
+DOMAIN,setup.workos.com
+DOMAIN,workos.imgix.net
+# Support chat (Intercom). DOMAIN-SUFFIX,intercom.io will catch all Intercom customers.
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+# Payment
+DOMAIN,js.stripe.com
+# Cloudflare bot challenge (shared)
+DOMAIN,challenges.cloudflare.com
+# Email click tracking
+DOMAIN-SUFFIX,ct.sendgrid.net
+# Apple device attestation / App Attest
+DOMAIN,humb.apple.com
+DOMAIN,register.appattest.apple.com
+# Telemetry / error reporting (OpenAI-specific Sentry projects; Datadog is shared)
+DOMAIN,o207216.ingest.sentry.io
+DOMAIN,o33249.ingest.sentry.io
+DOMAIN,o33249.ingest.us.sentry.io
+DOMAIN,rum.browser-intake-datadoghq.com
+DOMAIN,browser-intake-datadoghq.com
+# Community: Arkose captcha, Statsig feature flags, Qualtrics surveys, LiveKit TURN (shared)
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN-SUFFIX,client-api.arkoselabs.com
+DOMAIN,api.statsig.com
+DOMAIN-SUFFIX,featuregates.org
+DOMAIN,openai.qualtrics.com
+DOMAIN,host.livekit.cloud
+DOMAIN,turn.livekit.cloud
+
+# ===== Anthropic / Claude official third-party egress =====
+# https://code.claude.com/docs/en/network-config
+# Plugin / installer metadata and older updater CDN (shared Google Cloud Storage)
+DOMAIN,storage.googleapis.com
+# Plugin and npm installs (shared)
+DOMAIN,registry.npmjs.org
+# Official marketplace / changelog (shared GitHub)
+DOMAIN,github.com
+DOMAIN,raw.githubusercontent.com
+DOMAIN,objects.githubusercontent.com
+# Optional official telemetry (disableable in Claude Code)
+DOMAIN,http-intake.logs.us5.datadoghq.com
+DOMAIN,browser-intake-us5-datadoghq.com
+DOMAIN,ingest.us.sentry.io
+# Community / X discussion of Statsig + Sift risk controls (not official allowlist entries)
+# https://x.com/LanzhiAI/status/2123344781115879540 (2026-11-19)
+# https://x.com/LanzhiAI/status/2124133729602073031 (2026-11-21)
+DOMAIN-SUFFIX,statsigapi.net
+# SSO / cloud provider hosts if using Console login or Bedrock/Vertex/Foundry
+DOMAIN,login.microsoftonline.com
+DOMAIN,oauth2.googleapis.com
+DOMAIN,accounts.google.com
+DOMAIN,sts.googleapis.com
+DOMAIN,iamcredentials.googleapis.com
+
+# ===== Google Gemini official firewall shared Google hosts =====
+# https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/gemini-app-firewall-settings
+# These also serve Search, YouTube, Maps, fonts, ads, and Workspace.
+# isteed-AI.conf incorrectly uses DOMAIN-SUFFIX,googleapis.com; do not copy that.
+DOMAIN,www.googleapis.com
+DOMAIN,apis.google.com
+DOMAIN,ssl.gstatic.com
+DOMAIN,www.gstatic.com
+DOMAIN,fonts.googleapis.com
+DOMAIN,fonts.gstatic.com
+DOMAIN,lh3.googleusercontent.com
+DOMAIN,lh5.googleusercontent.com
+DOMAIN,lh3.google.com
+DOMAIN,ogs.google.com
+DOMAIN,play.google.com
+DOMAIN,www.google.com
+DOMAIN,maps.googleapis.com
+DOMAIN,maps.gstatic.com
+DOMAIN,jnn-pa.googleapis.com
+DOMAIN,waa-pa.clients6.google.com
+DOMAIN,content-autofill.googleapis.com
+DOMAIN,optimizationguide-pa.googleapis.com
+DOMAIN,streetviewpixels-pa.googleapis.com
+DOMAIN,csp.withgoogle.com
+DOMAIN,encrypted-tbn0.gstatic.com
+DOMAIN,encrypted-tbn1.gstatic.com
+DOMAIN,encrypted-tbn2.gstatic.com
+DOMAIN,encrypted-tbn3.gstatic.com
+# Official list also names YouTube / ads / analytics; keep them out of an AI policy
+# unless you deliberately want that traffic on the same egress:
+# www.youtube.com, i.ytimg.com, yt3.ggpht.com, www.googletagmanager.com,
+# www.google-analytics.com, static.doubleclick.net, td.doubleclick.net,
+# googleads.g.doubleclick.net, ogads-pa.clients6.google.com
+# Antigravity enterprise also allowlists general Vertex / Discovery Engine:
+# https://antigravity.google/docs/enterprise/
+DOMAIN,aiplatform.googleapis.com
+DOMAIN,aiplatform.us.rep.googleapis.com
+DOMAIN,aiplatform.eu.rep.googleapis.com
+DOMAIN,aiplatform.mtls.googleapis.com
+DOMAIN,discoveryengine.googleapis.com
+DOMAIN,us-discoveryengine.googleapis.com
+DOMAIN,eu-discoveryengine.googleapis.com
+DOMAIN,discoveryengine.mtls.googleapis.com
+DOMAIN,us-discoveryengine.mtls.googleapis.com
+DOMAIN,eu-discoveryengine.mtls.googleapis.com
+
+# ===== xAI / Grok official additional / installer =====
+# https://docs.x.ai/build/enterprise
+# CLI curl|bash installer fallback CDN (shared)
+# DOMAIN,storage.googleapis.com  (already listed under Anthropic)
+# Enterprise OIDC example in the same doc: login.microsoftonline.com (already listed)
+
+# Perplexity-specific upload/media hosts listed in the provider sections above.
+# v2fly data/perplexity
+
+# ===== Microsoft Copilot official app allowlist (update + sign-in only) =====
+# https://learn.microsoft.com/en-us/copilot/plan/add-copilot-endpoints-allowlist
+# Updated 2026-11-04. Chat hosts are NOT in this article.
+# Update service / Edge delivery (shared with Microsoft Edge)
+DOMAIN,msedge.api.cdp.microsoft.com
+DOMAIN,config.edge.skype.com
+DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com
+DOMAIN-SUFFIX,do.dsp.mp.microsoft.com
+# Sign-in for MSA and Entra ID (shared with almost all Microsoft products)
+DOMAIN,login.live.com
+DOMAIN,login.microsoft.com
+DOMAIN,login.windows.net
+DOMAIN,odc.officeapps.live.com
+DOMAIN,cdn.odc.officeapps.live.com
+DOMAIN,graph.microsoft.com
+DOMAIN,substrate.office.com
+DOMAIN,privacy.microsoft.com
+DOMAIN,logincdn.msauth.net
+# Do not add www.bing.com (blackmatrix7 / isteed do; it captures all Bing Search)
+
+# ===== GitHub Copilot official shared GitHub / Azure / experimentation =====
+# https://docs.github.com/en/copilot/reference/copilot-allowlist-reference
+DOMAIN,api.github.com
+DOMAIN,github.githubassets.com
+DOMAIN,avatars.githubusercontent.com
+DOMAIN,collector.github.com
+DOMAIN,default.exp-tas.com
+# Copilot-specific Azure Web PubSub hosts are in the provider sections above.
+# Fallback report downloads (shared Azure Front Door / Blob)
+# copilot-reports-*.b01.azurefd.net and usagereports*.blob.core.windows.net
+# are wildcard Azure hosts; left out of formal DOMAIN rules, see unverified-and-excluded.md
+
+# Cursor-specific binary downloads listed in the provider sections above.
+# WorkOS is listed by jinxinkai as DOMAIN-SUFFIX,workos.com (too broad).
+# Official Cursor network doc names Cursor hosts; WorkOS appears on OpenAI's list.
+# Binary downloads (community, dler-io):
+# Authenticator fallback authenticator.cursor.sh is covered by DOMAIN-SUFFIX,cursor.sh
+
+# ===== Windsurf official auth (over-broad if suffix is used) =====
+# https://docs.devin.ai/desktop/devin-desktop-faq
+# Official text allowlists .googleapis.com and apis.google.com for authentication.
+# Only the specific host is safe-ish; do not add DOMAIN-SUFFIX,googleapis.com
+
+# ===== Kimi web telemetry observed on official homepage HTML =====
+# https://www.kimi.com/ (fetched 2026-11-23) references apmplus.volces.com
+# That is Volcengine APM, shared observability, not Kimi-exclusive.
+DOMAIN,apmplus.volces.com
+
+# Shared Bing endpoints from community research; optional for Copilot
+DOMAIN-SUFFIX,edgeservices.bing.com
+DOMAIN,services.bingapis.com
+DOMAIN,r.bing.com
+
+# ===== Inbound IP rules (after all domain rules) =====
+# Claude API / Console inbound IPs; not outbound MCP source networks.
+# Verified 2026-11-23: https://platform.claude.com/docs/en/api/ip-addresses
+# Place after domain rules. no-resolve avoids DNS solely for these IP matches.
+IP-CIDR,160.79.104.0/23,no-resolve
+IP-CIDR,153.61.224.0/22,no-resolve
+IP-CIDR6,2607:6bc0::/48,no-resolve
